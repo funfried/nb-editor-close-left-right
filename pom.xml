@@ -14,9 +14,7 @@
     </properties>
 
     <description>
-        &lt;p&gt;
-        This plugins adds a new actions "Close Left" and "Close Right" to the context menu of an editor.
-        &lt;/p&gt;
+        This plugin adds a new actions "Close Left" and "Close Right" to the context menu of an editor
     </description>
 
     <build>
