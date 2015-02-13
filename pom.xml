@@ -43,6 +43,14 @@
                 <artifactId>nbm-maven-plugin</artifactId>
                 <version>3.13.3</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <licenseFile>LICENSE-2.0.txt</licenseFile>
+                    <author>Alexander Yastrebov (yastrebov.alex@gmail.com)</author>
+                    <homePageUrl>https://github.com/AlexanderYastrebov/nb-editor-close-left-right</homePageUrl>
+                    <keystore>nbproject/private/keystore</keystore>
+                    <keystorealias>myself</keystorealias>
+                    <licenseName>Apache 2.0</licenseName>
+                </configuration>
             </plugin>
         </plugins>
     </build>
