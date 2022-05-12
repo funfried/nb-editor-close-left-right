@@ -1,8 +1,6 @@
 [![Release Build Status](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/release_maven.yml/badge.svg)](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/release_maven.yml)
 [![Linux Build Status](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/linux_maven.yml/badge.svg)](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/linux_maven.yml)
 [![Windows Build Status](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/windows_maven.yml/badge.svg)](https://github.com/funfried/nb-editor-close-left-right/actions/workflows/windows_maven.yml)
-[![Coverage Status](https://coveralls.io/repos/github/funfried/nb-editor-close-left-right/badge.svg?branch=master)](https://coveralls.io/github/funfried/nb-editor-close-left-right?branch=master)
-[![Code Coverage](https://codecov.io/gh/funfried/nb-editor-close-left-right/branch/master/graph/badge.svg)](https://codecov.io/gh/funfried/nb-editor-close-left-right)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7d825731274a4f4783e4203eb7cbf811)](https://www.codacy.com/manual/funfried/nb-editor-close-left-right?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=funfried/nb-editor-close-left-right&amp;utm_campaign=Badge_Grade)
 [![Maven Central](https://img.shields.io/maven-central/v/de.funfried.netbeans.plugins/nb-editor-close-left-right)](https://repo1.maven.org/maven2/de/funfried/netbeans/plugins/nb-editor-close-left-right/)
 [![GitHub All Releases](https://img.shields.io/github/downloads/funfried/nb-editor-close-left-right/total)](https://github.com/funfried/nb-editor-close-left-right/releases)
