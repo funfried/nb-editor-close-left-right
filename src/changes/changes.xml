@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+	<properties>
+		<title>Changes of Close Editor Tabs Left and Right Plugin for Netbeans</title>
+		<author email="info@funfried.de">Fabian Bahle</author>
+	</properties>
+
+	<body>
+		<release version="1.0.0-SNAPSHOT" date="N/A" description="First release from funfried aka bahlef aka fbahle">
+			<action dev="bahlef" type="update">
+				Update plugin to latest dependencies and plugins and made it ready for the NetBeans plugin center to be published
+			</action>
+		</release>
+	</body>
+</document>
