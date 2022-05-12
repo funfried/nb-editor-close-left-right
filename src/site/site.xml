@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	Copyright (c) 2020 funfried.
+
+	All rights reserved. This program and the accompanying materials
+	are made available under the terms of the Eclipse Public License v2.0
+	which accompanies this distribution, and is available at
+	http://www.eclipse.org/legal/epl-v20.html
+
+-->
+<project name="${project.name}"
+		 xmlns="http://maven.apache.org/DECORATION/1.8.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.10.0</version>
+	</skin>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>true</topBarEnabled>
+			<sideBarEnabled>true</sideBarEnabled>
+		</fluidoSkin>
+	</custom>
+
+	<version position="right"/>
+	<publishDate position="right" />
+
+	<bannerLeft>
+		<name>Close Editor Tabs Left and Right Plugin for Netbeans</name>
+		<src>imgs/logos/nb-editor-close-left-right.png</src>
+		<href>https://funfried.github.io/nb-editor-close-left-right/</href>
+	</bannerLeft>
+
+	<bannerRight>
+		<name>Apache NetBeans</name>
+		<src>imgs/logos/netbeans.png</src>
+		<href>https://netbeans.apache.org/</href>
+	</bannerRight>
+
+	<poweredBy>
+		<logo name="Apache NetBeans" href="https://netbeans.apache.org/" img="imgs/logos/netbeans_small.png" />
+		<logo name="Maven" href="https://maven.apache.org/" img="https://maven.apache.org/images/logos/maven-feather.png" />
+		<logo name="Maven Central" href="https://maven-badges.herokuapp.com/maven-central/de.funfried.netbeans.plugins/nb-editor-close-left-right/" img="https://maven-badges.herokuapp.com/maven-central/de.funfried.netbeans.plugins/nb-editor-close-left-right/badge.svg" />
+		<logo name="Release Build Status" href="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/release_maven.yml" img="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/release_maven.yml/badge.svg" />
+		<logo name="Linux Build Status" href="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/linux_maven.yml" img="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/linux_maven.yml/badge.svg" />
+		<logo name="Windows Build Status" href="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/windows_maven.yml" img="https://github.com/funfried/nb-editor-close-left-right/actions/workflows/windows_maven.yml/badge.svg" />
+		<logo name="Codacy Badge" href="https://www.codacy.com/manual/funfried/nb-editor-close-left-right?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=funfried/nb-editor-close-left-right&amp;utm_campaign=Badge_Grade" img="https://api.codacy.com/project/badge/Grade/7d825731274a4f4783e4203eb7cbf811" />
+		<logo name="Follow Me On Twitter" href="https://twitter.com/funfried84" img="https://img.shields.io/twitter/follow/funfried84?style=social" />
+		<logo name="Donate via PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=926F5XBCTK2LQ&amp;source=url" img="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" />
+		<logo name="Become a Patron!" href="https://www.patreon.com/funfried" img="imgs/logos/become_a_patron_button.png" />
+		<logo name="Buy me a drink" href="https://www.buymeacoffee.com/funfried" img="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20drink&amp;emoji=%F0%9F%A5%83&amp;slug=funfried&amp;button_colour=5F7FFF&amp;font_colour=ffffff&amp;font_family=Cookie&amp;outline_colour=000000&amp;coffee_colour=FFDD00" />
+		<logo name="Say Thanks" href="https://saythanks.io/to/funfried" img="https://img.shields.io/static/v1?label=say&amp;message=thanks&amp;color=green&amp;style=for-the-badge&amp;logo=handshake" />
+	</poweredBy>
+
+	<body>
+		<breadcrumbs>
+			<item name="Home" href="index.html" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="Introduction" href="index.html"/>
+			<item name="Usage" href="usage.html"/>
+			<item name="Known Issues" href="known_issues.html"/>
+			<item name="Downloads" href="downloads.html"/>
+			<item name="Changelog" href="changes-report.html"/>
+		</menu>
+		<menu ref="reports" />
+
+		<links>
+			<item name="Apache NetBeans" href="http://netbeans.apache.org" />
+			<item name="GitHub project page" href="https://github.com/funfried/nb-editor-close-left-right/" />
+			<item name="funfried.de" href="https://www.funfried.de/en/" />
+			<item name="Donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=926F5XBCTK2LQ&amp;source=url" />
+		</links>
+	</body>
+</project>
