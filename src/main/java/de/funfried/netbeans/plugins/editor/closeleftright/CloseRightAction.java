@@ -11,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package ru.nullpointer.netbeans.plugins.closeside;
+package de.funfried.netbeans.plugins.editor.closeleftright;
 
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -24,18 +24,14 @@ import org.openide.util.NbBundle.Messages;
  *
  * @author Alexander Yastrebov
  */
-@ActionID(
-        category = "Editor",
-        id = "ru.nullpointer.netbeans.plugins.CloseRightAction"
-)
+@ActionID(category = "Editor", id = "de.funfried.netbeans.plugins.editor.closeleftright.CloseRightAction")
 @ActionRegistration(displayName = "#CTL_CloseRightAction")
 @ActionReferences({
-    @ActionReference(path = "Editors/TabActions", position = 0),//
+		@ActionReference(path = "Editors/TabActions", position = 2)
 })
 @Messages("CTL_CloseRightAction=Close Right")
 public class CloseRightAction extends ActionBase {
-
-    public CloseRightAction(EditorCookie cookie) {
-        super(cookie, false);
-    }
+	public CloseRightAction(EditorCookie cookie) {
+		super(cookie, false);
+	}
 }
