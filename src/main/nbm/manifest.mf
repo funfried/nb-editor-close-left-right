@@ -1,3 +1,2 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Display-Category: Editing
-
+OpenIDE-Module-Localizing-Bundle: de/funfried/netbeans/plugins/editor/closeleftright/Bundle.properties
