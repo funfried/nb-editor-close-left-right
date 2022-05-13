@@ -9,6 +9,9 @@
 	</properties>
 
 	<body>
+		<release version="1.0.1-SNAPSHOT" date="N/A" description="N/A">
+		</release>
+
 		<release version="1.0.0" date="N/A" description="First release from funfried aka bahlef aka fbahle">
 			<action dev="bahlef" type="update">
 				Update plugin to latest dependencies and plugins and made it ready for the NetBeans plugin center to be published
