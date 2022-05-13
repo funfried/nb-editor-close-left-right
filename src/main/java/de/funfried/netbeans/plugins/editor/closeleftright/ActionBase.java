@@ -26,14 +26,23 @@ import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
 /**
+ * Base class for closing editor tabs actions.
  *
  * @author Alexander Yastrebov
  */
 abstract class ActionBase implements ActionListener {
+	/** The {@link EditorCookie}. */
 	private final EditorCookie cookie;
 
+	/** Flag indicating to close all left or all right tabs. */
 	private final boolean initialClose;
 
+	/**
+	 * Constructor of abstract class {@link ActionBase}.
+	 *
+	 * @param cookie the {@link EditorCookie}
+	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
+	 */
 	ActionBase(EditorCookie cookie, boolean initialClose) {
 		this.cookie = cookie;
 		this.initialClose = initialClose;
@@ -68,6 +77,13 @@ abstract class ActionBase implements ActionListener {
 		}
 	}
 
+	/**
+	 * Returns the {@link TopComponent} belonging to the given {@code target}.
+	 *
+	 * @param target a {@link JTextComponent}
+	 *
+	 * @return the {@link TopComponent} belonging to the given {@code target} or {@code null} if it could not be found
+	 */
 	private TopComponent getOuterTopComponent(JTextComponent target) {
 		TopComponent tc = null;
 

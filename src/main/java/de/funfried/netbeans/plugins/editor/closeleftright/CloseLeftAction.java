@@ -21,6 +21,7 @@ import org.openide.cookies.EditorCookie;
 import org.openide.util.NbBundle.Messages;
 
 /**
+ * Close left editor tab context menu action.
  *
  * @author Alexander Yastrebov
  */
@@ -31,6 +32,11 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CloseLeftAction=Close Left")
 public class CloseLeftAction extends ActionBase {
+	/**
+	 * Creates a new instance of {@link CloseLeftAction}.
+	 *
+	 * @param cookie the {@link EditorCookie}
+	 */
 	public CloseLeftAction(EditorCookie cookie) {
 		super(cookie, true);
 	}
