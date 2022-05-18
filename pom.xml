@@ -345,7 +345,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<licenseName>Apache License, Version 2.0</licenseName>
-					<licenseFile>${basedir}/LICENSE-2.0.txt</licenseFile>
+					<licenseFile>${basedir}/LICENSE</licenseFile>
 					<distributionUrl>https://github.com/funfried/nb-editor-close-left-right/</distributionUrl>
 					<author>Fabian Bahle (info@funfried.de) / original author: Alexander Yastrebov (yastrebov.alex@gmail.com)</author>
 					<verifyRuntime>warn</verifyRuntime>
