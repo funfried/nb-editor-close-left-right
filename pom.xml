@@ -108,7 +108,7 @@
 
 		<dependency>
 			<groupId>org.netbeans.api</groupId>
-			<artifactId>org-openide-text</artifactId>
+			<artifactId>org-openide-modules</artifactId>
 			<version>${netbeans.version}</version>
 		</dependency>
 
@@ -116,6 +116,19 @@
 			<groupId>org.netbeans.api</groupId>
 			<artifactId>org-openide-windows</artifactId>
 			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.modules</groupId>
+			<artifactId>org-netbeans-core-windows</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 	</dependencies>
 

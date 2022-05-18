@@ -1,2 +1,3 @@
 Manifest-Version: 1.0
+OpenIDE-Module-Install: de/funfried/netbeans/plugins/editor/closeleftright/Installer.class
 OpenIDE-Module-Localizing-Bundle: de/funfried/netbeans/plugins/editor/closeleftright/Bundle.properties

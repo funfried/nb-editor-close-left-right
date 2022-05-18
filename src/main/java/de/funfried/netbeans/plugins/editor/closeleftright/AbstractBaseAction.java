@@ -14,13 +14,10 @@
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JEditorPane;
-import javax.swing.SwingUtilities;
-import javax.swing.text.JTextComponent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
-import org.openide.cookies.EditorCookie;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -28,11 +25,11 @@ import org.openide.windows.WindowManager;
 /**
  * Base class for closing editor tabs actions.
  *
- * @author Alexander Yastrebov
+ * @author bahlef
  */
-abstract class ActionBase implements ActionListener {
-	/** The {@link EditorCookie}. */
-	private final EditorCookie cookie;
+abstract class AbstractBaseAction extends AbstractAction {
+	/** the related {@link TopComponent} of this action. */
+	private final TopComponent topComponent;
 
 	/** Flag indicating to close all left or all right tabs. */
 	private final boolean initialClose;
@@ -40,12 +37,15 @@ abstract class ActionBase implements ActionListener {
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
-	 * @param cookie the {@link EditorCookie}
+	 * @param topComponent the related {@link TopComponent} of this action
+	 * @param name the name of this action
 	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
 	 */
-	ActionBase(EditorCookie cookie, boolean initialClose) {
-		this.cookie = cookie;
+	AbstractBaseAction(TopComponent topComponent, String name, boolean initialClose) {
+		this.topComponent = topComponent;
 		this.initialClose = initialClose;
+
+		putValue(Action.NAME, name);
 	}
 
 	/**
@@ -53,20 +53,14 @@ abstract class ActionBase implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent unused) {
-		JEditorPane[] panes = cookie.getOpenedPanes();
-		if (panes == null || panes.length == 0) {
-			return;
-		}
-
-		TopComponent self = getOuterTopComponent(panes[0]);
-		Mode mode = WindowManager.getDefault().findMode(self);
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
 		if (mode == null) {
 			return;
 		}
 
 		boolean close = initialClose;
 		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == self) {
+			if (tc == topComponent) {
 				close = !close;
 				continue;
 			}
@@ -77,22 +71,25 @@ abstract class ActionBase implements ActionListener {
 		}
 	}
 
-	/**
-	 * Returns the {@link TopComponent} belonging to the given {@code target}.
-	 *
-	 * @param target a {@link JTextComponent}
-	 *
-	 * @return the {@link TopComponent} belonging to the given {@code target} or {@code null} if it could not be found
-	 */
-	private TopComponent getOuterTopComponent(JTextComponent target) {
-		TopComponent tc = null;
-
-		TopComponent parent = (TopComponent) SwingUtilities.getAncestorOfClass(TopComponent.class, target);
-		while (parent != null) {
-			tc = parent;
-			parent = (TopComponent) SwingUtilities.getAncestorOfClass(TopComponent.class, tc);
+	@Override
+	public boolean isEnabled() {
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
+		if (mode == null) {
+			return false;
 		}
 
-		return tc;
+		boolean close = initialClose;
+		for (TopComponent tc : mode.getTopComponents()) {
+			if (tc == topComponent) {
+				close = !close;
+				continue;
+			}
+
+			if (close && tc.isOpened()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
