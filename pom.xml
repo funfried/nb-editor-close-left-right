@@ -247,6 +247,9 @@
 					<configuration>
 						<quiet>true</quiet>
 						<doclint>all,-missing</doclint>
+						<sourceFileExcludes>
+							<exclude>**/Yenta.java</exclude>
+						</sourceFileExcludes>
 						<!-- Not existent for RELEASE110, can be reactivated when switching to a newer NetBeans version -->
 						<!--						<links>
 							<link>https://javadoc.io/static/org.netbeans.api/org-openide-util/${netbeans.version}/</link>
