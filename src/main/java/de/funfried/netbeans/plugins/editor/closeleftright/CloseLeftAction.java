@@ -13,31 +13,23 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
-import org.openide.awt.ActionID;
-import org.openide.awt.ActionReference;
-import org.openide.awt.ActionReferences;
-import org.openide.awt.ActionRegistration;
-import org.openide.cookies.EditorCookie;
+import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.TopComponent;
 
 /**
  * Close left editor tab context menu action.
  *
  * @author Alexander Yastrebov
  */
-@ActionID(category = "Editor", id = "de.funfried.netbeans.plugins.editor.closeleftright.CloseLeftAction")
-@ActionRegistration(displayName = "#CTL_CloseLeftAction", iconInMenu = false)
-@ActionReferences({
-		@ActionReference(path = "Editors/TabActions", position = 1)
-})
 @Messages("CTL_CloseLeftAction=Close Left")
-public class CloseLeftAction extends ActionBase {
+public class CloseLeftAction extends AbstractBaseAction {
 	/**
 	 * Creates a new instance of {@link CloseLeftAction}.
 	 *
-	 * @param cookie the {@link EditorCookie}
+	 * @param topComponent the related {@link TopComponent} of this action
 	 */
-	public CloseLeftAction(EditorCookie cookie) {
-		super(cookie, true);
+	public CloseLeftAction(TopComponent topComponent) {
+		super(topComponent, NbBundle.getMessage(CloseLeftAction.class, "CTL_CloseLeftAction"), true);
 	}
 }

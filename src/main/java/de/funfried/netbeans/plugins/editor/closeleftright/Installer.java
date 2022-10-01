@@ -13,23 +13,22 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.windows.TopComponent;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Close right editor tab context menu action.
- *
- * @author Alexander Yastrebov
- */
-@Messages("CTL_CloseRightAction=Close Right")
-public class CloseRightAction extends AbstractBaseAction {
-	/**
-	 * Creates a new instance of {@link CloseRightAction}.
-	 *
-	 * @param topComponent the related {@link TopComponent} of this action
-	 */
-	public CloseRightAction(TopComponent topComponent) {
-		super(topComponent, NbBundle.getMessage(CloseRightAction.class, "CTL_CloseRightAction"), false);
+import de.funfried.netbeans.plugins.editor.closeleftright.yenta.Yenta;
+
+public class Installer extends Yenta {
+	@Override
+	protected Set<String> friends() {
+		// Exposes an API, just not to us.
+		return Collections.emptySet();
+	}
+
+	@Override
+	protected Set<String> siblings() {
+		return new HashSet<>(Arrays.asList("org.netbeans.core.windows"));
 	}
 }
