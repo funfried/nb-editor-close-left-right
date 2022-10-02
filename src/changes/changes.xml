@@ -9,7 +9,7 @@
 	</properties>
 
 	<body>
-		<release version="1.0.1-SNAPSHOT" date="N/A" description="N/A">
+		<release version="1.0.1" date="2022-10-02" description="Moved actions at the correct position">
 			<action dev="bahlef" type="fix" issue="1">
 				With the help of Yenta, I was able to move the actions right next to the NetBeans close actions.
 			</action>
