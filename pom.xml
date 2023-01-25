@@ -81,9 +81,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<keystore.file>${project.build.directory}/keystore</keystore.file>
 		<commons-lang.version>3.12.0</commons-lang.version>
 		<netbeans.version>RELEASE110</netbeans.version>
-		<pmd.version>6.49.0</pmd.version>
+		<pmd.version>6.53.0</pmd.version>
 		<argLine></argLine>
 	</properties>
 
@@ -153,7 +154,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>3.0.1</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -193,12 +194,17 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>buildnumber-maven-plugin</artifactId>
-					<version>1.4</version>
+					<version>3.0.0</version>
 					<configuration>
 						<shortRevisionLength>6</shortRevisionLength>
 						<doCheck>false</doCheck>
 						<doUpdate>false</doUpdate>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>keytool-maven-plugin</artifactId>
+					<version>1.6</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -208,7 +214,7 @@
 				<plugin>
 					<groupId>net.revelc.code.formatter</groupId>
 					<artifactId>formatter-maven-plugin</artifactId>
-					<version>2.20.0</version>
+					<version>2.21.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -266,7 +272,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
-					<version>2.12.0</version>
+					<version>2.14.2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -299,7 +305,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>3.4.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -336,12 +342,12 @@
 				<plugin>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs-maven-plugin</artifactId>
-					<version>4.7.2.0</version>
+					<version>4.7.3.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.owasp</groupId>
 					<artifactId>dependency-check-maven</artifactId>
-					<version>7.2.0</version>
+					<version>7.4.4</version>
 					<configuration>
 						<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 					</configuration>
@@ -365,6 +371,9 @@
 					<distributionUrl>https://github.com/funfried/nb-editor-close-left-right/</distributionUrl>
 					<author>Fabian Bahle (info@funfried.de) / original author: Alexander Yastrebov (yastrebov.alex@gmail.com)</author>
 					<verifyRuntime>warn</verifyRuntime>
+					<keystore>${keystore.file}</keystore>
+					<keystorealias>${project.artifactId}</keystorealias>
+					<keystorepassword>${keystore.pass}</keystorepassword>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -628,6 +637,29 @@
 			<id>release-commons</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>keytool-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generateKeyPair</goal>
+								</goals>
+								<phase>initialize</phase>
+							</execution>
+						</executions>
+						<configuration>
+							<keystore>${keystore.file}</keystore>
+							<storepass>${keystore.pass}</storepass>
+							<keypass>${keystore.pass}</keypass>
+							<alias>${project.artifactId}</alias>
+							<dname>CN=funfried.de, OU=${project.artifactId}, O=funfried.de, L=Schwaebisch Hall, ST=Baden-Wuerttemberg, C=DE</dname>
+							<validity>730</validity>
+							<keysize>2048</keysize>
+							<sigalg>SHA512withRSA</sigalg>
+							<keyalg>RSA</keyalg>
+						</configuration>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
