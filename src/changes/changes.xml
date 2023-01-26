@@ -9,7 +9,10 @@
 	</properties>
 
 	<body>
-		<release version="1.0.2-SNAPSHOT" date="N/A" description="N/A">
+		<release version="1.0.2" date="2023-01-26" description="Added signing of nbm">
+			<action dev="bahlef" type="add">
+				Signing of nbm file as requested by the NetBeans team to get the plugin center verification
+			</action>
 		</release>
 
 		<release version="1.0.1" date="2022-10-02" description="Moved actions at the correct position">
