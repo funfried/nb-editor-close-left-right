@@ -17,7 +17,7 @@
 
 	<groupId>de.funfried.netbeans.plugins</groupId>
 	<artifactId>nb-editor-close-left-right</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<packaging>nbm</packaging>
 
 	<developers>
@@ -84,7 +84,7 @@
 		<keystore.file>${project.build.directory}/keystore</keystore.file>
 		<commons-lang.version>3.12.0</commons-lang.version>
 		<netbeans.version>RELEASE110</netbeans.version>
-		<pmd.version>6.53.0</pmd.version>
+		<pmd.version>6.55.0</pmd.version>
 		<argLine></argLine>
 	</properties>
 
@@ -109,7 +109,19 @@
 
 		<dependency>
 			<groupId>org.netbeans.api</groupId>
+			<artifactId>org-openide-util-lookup</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.api</groupId>
 			<artifactId>org-openide-modules</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.api</groupId>
+			<artifactId>org-openide-filesystems</artifactId>
 			<version>${netbeans.version}</version>
 		</dependency>
 
@@ -123,6 +135,48 @@
 			<groupId>org.netbeans.modules</groupId>
 			<artifactId>org-netbeans-core-windows</artifactId>
 			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.api</groupId>
+			<artifactId>org-netbeans-modules-projectapi</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.api</groupId>
+			<artifactId>org-netbeans-modules-projectuiapi-base</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.api</groupId>
+			<artifactId>org-netbeans-libs-git</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.modules</groupId>
+			<artifactId>org-netbeans-modules-subversion</artifactId>
+			<version>${netbeans.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.netbeans.modules</groupId>
+					<artifactId>org-netbeans-libs-ini4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.modules</groupId>
+			<artifactId>org-netbeans-modules-mercurial</artifactId>
+			<version>${netbeans.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.netbeans.modules</groupId>
+					<artifactId>org-netbeans-libs-ini4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Apache Commons -->
@@ -144,7 +198,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.10.1</version>
+					<version>3.11.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -154,12 +208,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.1.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>3.3.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -169,12 +223,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>3.4.2</version>
+					<version>3.5.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.1.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -204,17 +258,17 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>keytool-maven-plugin</artifactId>
-					<version>1.6</version>
+					<version>1.7</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
-					<version>3.0.1</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>net.revelc.code.formatter</groupId>
 					<artifactId>formatter-maven-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>2.22.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -227,29 +281,29 @@
 						<dependency>
 							<groupId>org.apache.maven.skins</groupId>
 							<artifactId>maven-fluido-skin</artifactId>
-							<version>1.11.1</version>
+							<version>1.11.2</version>
 						</dependency>
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-xdoc</artifactId>
-							<version>1.11.1</version>
+							<version>1.12.0</version>
 						</dependency>
 					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-scm-publish-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.2.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.4.1</version>
+					<version>3.4.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.4.1</version>
+					<version>3.5.0</version>
 					<configuration>
 						<quiet>true</quiet>
 						<doclint>all,-missing</doclint>
@@ -272,7 +326,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
-					<version>2.14.2</version>
+					<version>2.15.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -295,17 +349,17 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>license-maven-plugin</artifactId>
-					<version>2.0.0</version>
+					<version>2.0.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.0.0-M7</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.4.0</version>
+					<version>3.5.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -315,7 +369,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.19.0</version>
+					<version>3.20.0</version>
 					<dependencies>
 						<dependency>
 							<groupId>net.sourceforge.pmd</groupId>
@@ -342,12 +396,12 @@
 				<plugin>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs-maven-plugin</artifactId>
-					<version>4.7.3.0</version>
+					<version>4.7.3.4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.owasp</groupId>
 					<artifactId>dependency-check-maven</artifactId>
-					<version>7.4.4</version>
+					<version>8.2.1</version>
 					<configuration>
 						<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 					</configuration>

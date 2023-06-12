@@ -20,18 +20,18 @@ import org.openide.windows.TopComponent;
 /**
  * Close left editor tab context menu action.
  *
- * @author Alexander Yastrebov
+ * @author bahlef
  */
-@Messages("CTL_CloseLeftAction=Close Left")
-public class CloseLeftAction extends AbstractBaseAction {
-	private static final long serialVersionUID = -6948129193867379695L;
+@Messages("CTL_CloseOtherProjectTabsAction=Close All From Other Projects")
+public class CloseOtherProjectTabsAction extends AbstractProjectBaseAction {
+	private static final long serialVersionUID = -6406411298190620857L;
 
 	/**
-	 * Creates a new instance of {@link CloseLeftAction}.
+	 * Creates a new instance of {@link CloseOtherProjectTabsAction}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 */
-	public CloseLeftAction(TopComponent topComponent) {
-		super(topComponent, NbBundle.getMessage(CloseLeftAction.class, "CTL_CloseLeftAction"), true);
+	public CloseOtherProjectTabsAction(TopComponent topComponent) {
+		super(topComponent, NbBundle.getMessage(CloseOtherProjectTabsAction.class, "CTL_CloseOtherProjectTabsAction"), false);
 	}
 }
