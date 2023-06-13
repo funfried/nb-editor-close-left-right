@@ -22,19 +22,20 @@ import org.netbeans.core.windows.actions.CloseModeAction;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 /**
  *
  * @author fbahle
  */
 @ServiceProvider(service = ActionsFactory.class, position = Integer.MAX_VALUE)
-public class CloseLeftRightActionsFactory extends ActionsFactory {
+public class AdditionalCloseActionsFactory extends ActionsFactory {
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Action[] createPopupActions(TopComponent tc, Action[] actions) {
-		return addCloseLeftRightActions(tc, actions);
+		return addCloseLeftRightActions(tc, WindowManager.getDefault().findMode(tc), actions);
 	}
 
 	/**
@@ -42,14 +43,21 @@ public class CloseLeftRightActionsFactory extends ActionsFactory {
 	 */
 	@Override
 	public Action[] createPopupActions(Mode mode, Action[] actions) {
-		return addCloseLeftRightActions(mode.getSelectedTopComponent(), actions);
+		return addCloseLeftRightActions(mode.getSelectedTopComponent(), mode, actions);
 	}
 
-	private Action[] addCloseLeftRightActions(TopComponent tc, Action[] actions) {
+	private Action[] addCloseLeftRightActions(TopComponent tc, Mode mode, Action[] actions) {
+		boolean isEditorTc = mode != null && mode.getName().equalsIgnoreCase("editor");
+
+		Action[] actionsToAdd = new Action[] { new CloseLeftAction(tc), new CloseRightAction(tc) };
+		if (isEditorTc) {
+			actionsToAdd = ArrayUtils.addAll(actionsToAdd, new CloseSameProjectTabsAction(tc), new CloseOtherProjectTabsAction(tc), new CloseCommitedAction(tc));
+		}
+
 		for (int i = 0; i < actions.length; i++) {
 			Action action = actions[i];
 			if (action instanceof CloseAllButThisAction || action instanceof CloseModeAction) {
-				actions = ArrayUtils.insert(i + 1, actions, new CloseLeftAction(tc), new CloseRightAction(tc));
+				actions = ArrayUtils.insert(i + 1, actions, actionsToAdd);
 
 				break;
 			}

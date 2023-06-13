@@ -24,6 +24,8 @@ import org.openide.windows.TopComponent;
  */
 @Messages("CTL_CloseRightAction=Close Right")
 public class CloseRightAction extends AbstractBaseAction {
+	private static final long serialVersionUID = -8970638174416914392L;
+
 	/**
 	 * Creates a new instance of {@link CloseRightAction}.
 	 *

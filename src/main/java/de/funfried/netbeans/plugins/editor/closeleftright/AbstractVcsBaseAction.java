@@ -17,36 +17,36 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import org.openide.filesystems.FileObject;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.GitUtils;
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.HgUtils;
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.SvnUtils;
+
 /**
- * Base class for closing left or right tabs actions.
+ * Base class for closing tabs VCS related actions.
  *
  * @author bahlef
  */
-abstract class AbstractBaseAction extends AbstractAction {
-	private static final long serialVersionUID = -8499198129424546354L;
+abstract class AbstractVcsBaseAction extends AbstractAction {
+	private static final long serialVersionUID = 2663271640670763067L;
 
 	/** the related {@link TopComponent} of this action. */
 	protected final TopComponent topComponent;
-
-	/** Flag indicating to close all left or all right tabs. */
-	protected final boolean initialClose;
 
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
-	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
 	 */
-	AbstractBaseAction(TopComponent topComponent, String name, boolean initialClose) {
+	AbstractVcsBaseAction(TopComponent topComponent, String name) {
 		super(name);
 
 		this.topComponent = topComponent;
-		this.initialClose = initialClose;
 	}
 
 	/**
@@ -59,15 +59,17 @@ abstract class AbstractBaseAction extends AbstractAction {
 			return;
 		}
 
-		boolean close = initialClose;
 		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == topComponent) {
-				close = !close;
-				continue;
-			}
-
-			if (close && tc.isOpened()) {
-				tc.close();
+			if (tc.isOpened()) {
+				FileObject fileObject = tc.getLookup().lookup(FileObject.class);
+				if (fileObject != null) {
+					Boolean gitModified = GitUtils.isModified(fileObject);
+					Boolean svnModified = SvnUtils.isModified(fileObject);
+					Boolean hgModified = HgUtils.isModified(fileObject);
+					if ((gitModified != null && !gitModified) || (svnModified != null && !svnModified) || (hgModified != null && !hgModified)) {
+						tc.close();
+					}
+				}
 			}
 		}
 	}
@@ -79,15 +81,15 @@ abstract class AbstractBaseAction extends AbstractAction {
 			return false;
 		}
 
-		boolean close = initialClose;
 		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == topComponent) {
-				close = !close;
-				continue;
-			}
-
-			if (close && tc.isOpened()) {
-				return true;
+			FileObject fileObject = tc.getLookup().lookup(FileObject.class);
+			if (fileObject != null) {
+				Boolean gitModified = GitUtils.isModified(fileObject);
+				Boolean svnModified = SvnUtils.isModified(fileObject);
+				Boolean hgModified = HgUtils.isModified(fileObject);
+				if ((gitModified != null && !gitModified) || (svnModified != null && !svnModified) || (hgModified != null && !hgModified)) {
+					return true;
+				}
 			}
 		}
 

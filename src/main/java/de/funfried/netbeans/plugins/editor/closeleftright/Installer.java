@@ -21,6 +21,8 @@ import java.util.Set;
 import de.funfried.netbeans.plugins.editor.closeleftright.yenta.Yenta;
 
 public class Installer extends Yenta {
+	private static final long serialVersionUID = -1116541188000901765L;
+
 	@Override
 	protected Set<String> friends() {
 		// Exposes an API, just not to us.
@@ -29,6 +31,6 @@ public class Installer extends Yenta {
 
 	@Override
 	protected Set<String> siblings() {
-		return new HashSet<>(Arrays.asList("org.netbeans.core.windows"));
+		return new HashSet<>(Arrays.asList("org.netbeans.core.windows", "org.netbeans.modules.subversion", "org.netbeans.modules.mercurial"));
 	}
 }
