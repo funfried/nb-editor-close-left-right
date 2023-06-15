@@ -9,6 +9,9 @@
 	</properties>
 
 	<body>
+		<release version="1.0.4-SNAPSHOT" date="N/A" description="N/A">
+		</release>
+
 		<release version="1.0.3" date="2023-06-15" description="Added more close actions">
 			<action dev="bahlef" type="add" issue="13">
 				Added close action to close all tabs which are not changed in the used VCS (Git, SVN and Mercurial supported).
