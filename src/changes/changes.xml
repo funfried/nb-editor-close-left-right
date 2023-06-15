@@ -9,6 +9,15 @@
 	</properties>
 
 	<body>
+		<release version="1.0.3" date="2023-06-15" description="Added more close actions">
+			<action dev="bahlef" type="add" issue="13">
+				Added close action to close all tabs which are not changed in the used VCS (Git, SVN and Mercurial supported).
+			</action>
+			<action dev="bahlef" type="add">
+				Added close actions to close all tabs which either belong or not belong to the project of the selected tab.
+			</action>
+		</release>
+
 		<release version="1.0.2" date="2023-01-26" description="Added signing of nbm">
 			<action dev="bahlef" type="add">
 				Signing of nbm file as requested by the NetBeans team to get the plugin center verification
