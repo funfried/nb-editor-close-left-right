@@ -15,10 +15,14 @@ What is Close Editor Tabs Left and Right Plugin for Netbeans
 ----------------------------------------------------
 This plugin helps you to easily close unused or unwanted editor tabs. Instead of either
 close all tabs or all tabs except the currently selected you can also close the tabs
-right or left from the context menu of a selected tab at once.
+right or left, the ones either belong or not belong to the project from the context
+menu of a selected tab at once or even all tabs that have not been changed since the
+last commit to your version control system (Git, SVN and Mercurial supported).
 
 ### Features
-*   Close all editor tabs right or left from the context menu of a selected tab at once
+*   Close all editor tabs from the context menu of a selected tab right or left of the selected tab at once
+*   Close all editor tabs from the context menu of a selected tab which either belong or not belong to the project of the selected tab at once
+*   Close all editor tabs from the context menu of a selected tab which did not change since the last commit to your version control system (Git, SVN and Mercurial supported)
 
 Compatibility
 -------------

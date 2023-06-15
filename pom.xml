@@ -5,7 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<name>Close Editor Tabs Left and Right</name>
-	<description>This plugin helps you to easily close unused or unwanted editor tabs. Instead of either close all tabs or all tabs except the currently selected you can also close the tabs right or left from the context menu of a selected tab at once.</description>
+	<description>
+		This plugin helps you to easily close unused or unwanted editor tabs. Instead of either close all tabs
+		or all tabs except the currently selected you can also close the tabs right or left, the ones either
+		belong or not belong to the project from the context menu of a selected tab at once or even all tabs
+		that have not been changed since the last commit to your version control system (Git, SVN and Mercurial
+		supported).
+	</description>
 	<url>https://funfried.github.io/nb-editor-close-left-right/</url>
 	<inceptionYear>2022</inceptionYear>
 	<licenses>
@@ -17,7 +23,7 @@
 
 	<groupId>de.funfried.netbeans.plugins</groupId>
 	<artifactId>nb-editor-close-left-right</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>nbm</packaging>
 
 	<developers>
