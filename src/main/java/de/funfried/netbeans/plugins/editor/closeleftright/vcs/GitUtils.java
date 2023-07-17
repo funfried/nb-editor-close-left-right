@@ -26,7 +26,7 @@ public interface GitUtils {
 	static Boolean isModified(FileObject fileObject) {
 		GitStatus.Status status = getStatus(fileObject);
 		if (status == null) {
-			return null;
+			return false;
 		}
 
 		return !GitStatus.Status.STATUS_NORMAL.equals(status);
