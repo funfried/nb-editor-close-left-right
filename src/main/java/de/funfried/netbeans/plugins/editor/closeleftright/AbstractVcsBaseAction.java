@@ -63,12 +63,24 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 			if (tc.isOpened()) {
 				FileObject fileObject = tc.getLookup().lookup(FileObject.class);
 				if (fileObject != null) {
+                                        Boolean modifiedInAnyVCS = false;
 					Boolean gitModified = GitUtils.isModified(fileObject);
 					Boolean svnModified = SvnUtils.isModified(fileObject);
 					Boolean hgModified = HgUtils.isModified(fileObject);
-					if ((gitModified != null && !gitModified) || (svnModified != null && !svnModified) || (hgModified != null && !hgModified)) {
-						tc.close();
-					}
+                                        
+					if (gitModified != null && gitModified == true) {
+                                            modifiedInAnyVCS = true; //changed in git
+					}else if (svnModified != null && svnModified == true) { 
+                                            modifiedInAnyVCS = true;	//not changed in git but in svn
+					}else if (hgModified != null && hgModified == true) {
+                                            modifiedInAnyVCS = true;	//not changed in git & svn but in hg	
+					}else{
+                                            //not changed in any vcs
+                                        }
+                                        
+                                        if(!modifiedInAnyVCS){
+                                            tc.close();
+                                        }
 				}
 			}
 		}
