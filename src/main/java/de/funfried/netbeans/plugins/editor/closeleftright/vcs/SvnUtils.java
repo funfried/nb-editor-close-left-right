@@ -20,7 +20,7 @@ public interface SvnUtils {
 	static Boolean isModified(FileObject fileObject) {
 		int status = getStatus(fileObject);
 		if (status == FileInformation.STATUS_UNKNOWN || status == FileInformation.STATUS_NOTVERSIONED_NOTMANAGED) {
-			return null;
+			return false;
 		}
 
 		return (status & FileInformation.STATUS_LOCAL_CHANGE) != 0;
