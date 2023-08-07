@@ -66,9 +66,11 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 					Boolean gitModified = GitUtils.isModified(fileObject);
 					Boolean svnModified = SvnUtils.isModified(fileObject);
 					Boolean hgModified = HgUtils.isModified(fileObject);
-					if ((gitModified != null && !gitModified) || (svnModified != null && !svnModified) || (hgModified != null && !hgModified)) {
+
+					if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
 						tc.close();
 					}
+
 				}
 			}
 		}
@@ -87,7 +89,8 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 				Boolean gitModified = GitUtils.isModified(fileObject);
 				Boolean svnModified = SvnUtils.isModified(fileObject);
 				Boolean hgModified = HgUtils.isModified(fileObject);
-				if ((gitModified != null && !gitModified) || (svnModified != null && !svnModified) || (hgModified != null && !hgModified)) {
+
+				if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
 					return true;
 				}
 			}
