@@ -14,6 +14,8 @@
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 
@@ -28,6 +30,8 @@ import org.openide.windows.WindowManager;
  */
 abstract class AbstractBaseAction extends AbstractAction {
 	private static final long serialVersionUID = -8499198129424546354L;
+
+	private static final Logger log = Logger.getLogger(AbstractBaseAction.class.getName());
 
 	/** the related {@link TopComponent} of this action. */
 	protected final TopComponent topComponent;
@@ -80,15 +84,20 @@ abstract class AbstractBaseAction extends AbstractAction {
 		}
 
 		boolean close = initialClose;
-		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == topComponent) {
-				close = !close;
-				continue;
-			}
 
-			if (close && tc.isOpened()) {
-				return true;
+		try {
+			for (TopComponent tc : mode.getTopComponents()) {
+				if (tc == topComponent) {
+					close = !close;
+					continue;
+				}
+
+				if (close && tc.isOpened()) {
+					return true;
+				}
 			}
+		} catch (Exception ex) {
+			log.log(Level.WARNING, NAME, ex);
 		}
 
 		return false;

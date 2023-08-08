@@ -79,15 +79,19 @@ abstract class AbstractProjectBaseAction extends AbstractBaseAction {
 			return null;
 		}
 
+		Project ret = null;
+
 		FileObject fileObject = topComponent.getLookup().lookup(FileObject.class);
 		if (fileObject != null) {
 			for (Project project : openProjects) {
 				if (FileUtil.isParentOf(project.getProjectDirectory(), fileObject)) {
-					return project;
+					if (ret == null || FileUtil.isParentOf(ret.getProjectDirectory(), project.getProjectDirectory())) {
+						ret = project;
+					}
 				}
 			}
 		}
 
-		return null;
+		return ret;
 	}
 }
