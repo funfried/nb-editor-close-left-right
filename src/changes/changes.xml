@@ -9,7 +9,10 @@
 	</properties>
 
 	<body>
-		<release version="1.0.4-SNAPSHOT" date="N/A" description="N/A">
+		<release version="1.0.4" date="2023-08-10" description="Fixed new close actions">
+			<action dev="bahlef" type="fix" issue="17">
+				Fixed new VCS and project actions.
+			</action>
 		</release>
 
 		<release version="1.0.3" date="2023-06-15" description="Added more close actions">
