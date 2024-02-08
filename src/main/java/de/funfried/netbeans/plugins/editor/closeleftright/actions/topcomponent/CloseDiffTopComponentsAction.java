@@ -11,27 +11,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
 import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 /**
- * Close left editor tab context menu action.
+ * Close VCS diff editor tab context menu action.
  *
  * @author bahlef
  */
-@Messages("CTL_CloseSameProjectTabsAction=Close All From Same Project")
-public class CloseSameProjectTabsAction extends AbstractProjectBaseAction {
-	private static final long serialVersionUID = -7858355126214500476L;
+@Messages("CTL_CloseDiffTopComponentsAction=Close VCS Diff Tabs")
+public class CloseDiffTopComponentsAction extends AbstractTopComponentBaseAction {
+	private static final long serialVersionUID = 8838158102777470061L;
 
 	/**
-	 * Creates a new instance of {@link CloseSameProjectTabsAction}.
+	 * Creates a new instance of {@link CloseDiffTopComponentsAction}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 */
-	public CloseSameProjectTabsAction(TopComponent topComponent) {
-		super(topComponent, NbBundle.getMessage(CloseSameProjectTabsAction.class, "CTL_CloseSameProjectTabsAction"), true);
+	public CloseDiffTopComponentsAction(TopComponent topComponent) {
+		super(topComponent, NbBundle.getMessage(CloseDiffTopComponentsAction.class, "CTL_CloseDiffTopComponentsAction"), org.netbeans.modules.git.ui.diff.DiffTopComponent.class,
+				org.netbeans.modules.subversion.ui.diff.DiffTopComponent.class, org.netbeans.modules.mercurial.ui.diff.DiffTopComponent.class);
 	}
 }

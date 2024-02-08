@@ -13,6 +13,12 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent.CloseDiffTopComponentsAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent.CloseSearchHistoryTopComponentsAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs.CloseCommitedAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.project.CloseOtherProjectTabsAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.project.CloseSameProjectTabsAction;
+
 import javax.swing.Action;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -23,6 +29,9 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.CloseLeftAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.CloseRightAction;
 
 /**
  *
@@ -51,7 +60,8 @@ public class AdditionalCloseActionsFactory extends ActionsFactory {
 
 		Action[] actionsToAdd = new Action[] { new CloseLeftAction(tc), new CloseRightAction(tc) };
 		if (isEditorTc) {
-			actionsToAdd = ArrayUtils.addAll(actionsToAdd, new CloseSameProjectTabsAction(tc), new CloseOtherProjectTabsAction(tc), new CloseCommitedAction(tc));
+			actionsToAdd = ArrayUtils.addAll(actionsToAdd, new CloseSameProjectTabsAction(tc), new CloseOtherProjectTabsAction(tc), new CloseCommitedAction(tc), new CloseDiffTopComponentsAction(tc),
+					new CloseSearchHistoryTopComponentsAction(tc));
 		}
 
 		for (int i = 0; i < actions.length; i++) {

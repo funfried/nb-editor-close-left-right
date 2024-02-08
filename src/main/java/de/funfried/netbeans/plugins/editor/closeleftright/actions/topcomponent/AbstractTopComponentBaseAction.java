@@ -11,28 +11,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.openide.filesystems.FileObject;
+import org.apache.commons.lang3.ArrayUtils;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
-import de.funfried.netbeans.plugins.editor.closeleftright.vcs.GitUtils;
-import de.funfried.netbeans.plugins.editor.closeleftright.vcs.HgUtils;
-import de.funfried.netbeans.plugins.editor.closeleftright.vcs.SvnUtils;
-
 /**
- * Base class for closing tabs VCS related actions.
+ * Base class for closing tabs with specific TopComponent implementations related actions.
  *
  * @author bahlef
  */
-abstract class AbstractVcsBaseAction extends AbstractAction {
-	private static final long serialVersionUID = 2663271640670763067L;
+abstract class AbstractTopComponentBaseAction extends AbstractAction {
+	private static final long serialVersionUID = 4175615224177055417L;
+
+	protected final Class<? extends TopComponent>[] topComponentTypes;
 
 	/** the related {@link TopComponent} of this action. */
 	protected final TopComponent topComponent;
@@ -42,10 +40,12 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
+	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
 	 */
-	AbstractVcsBaseAction(TopComponent topComponent, String name) {
+	AbstractTopComponentBaseAction(TopComponent topComponent, String name, Class<? extends TopComponent>... topComponentTypes) {
 		super(name);
 
+		this.topComponentTypes = topComponentTypes;
 		this.topComponent = topComponent;
 	}
 
@@ -60,18 +60,8 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 		}
 
 		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc.isOpened()) {
-				FileObject fileObject = tc.getLookup().lookup(FileObject.class);
-				if (fileObject != null) {
-					Boolean gitModified = GitUtils.isModified(fileObject);
-					Boolean svnModified = SvnUtils.isModified(fileObject);
-					Boolean hgModified = HgUtils.isModified(fileObject);
-
-					if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
-						tc.close();
-					}
-
-				}
+			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
+				tc.close();
 			}
 		}
 	}
@@ -84,13 +74,18 @@ abstract class AbstractVcsBaseAction extends AbstractAction {
 		}
 
 		for (TopComponent tc : mode.getTopComponents()) {
-			FileObject fileObject = tc.getLookup().lookup(FileObject.class);
-			if (fileObject != null) {
-				Boolean gitModified = GitUtils.isModified(fileObject);
-				Boolean svnModified = SvnUtils.isModified(fileObject);
-				Boolean hgModified = HgUtils.isModified(fileObject);
+			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
+				return true;
+			}
+		}
 
-				if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
+		return false;
+	}
+
+	protected boolean isAssignableFromGivenTypes(Class<? extends TopComponent> topComponentClass) {
+		if (topComponentClass != null && ArrayUtils.isNotEmpty(topComponentTypes)) {
+			for (Class<? extends TopComponent> topComponentType : topComponentTypes) {
+				if (topComponentClass.isAssignableFrom(topComponentType)) {
 					return true;
 				}
 			}

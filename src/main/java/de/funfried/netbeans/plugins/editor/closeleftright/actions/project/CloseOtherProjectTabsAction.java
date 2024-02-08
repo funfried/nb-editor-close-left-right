@@ -11,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.project;
 
 import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;

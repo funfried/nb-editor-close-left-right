@@ -11,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.project;
 
 import java.awt.event.ActionEvent;
 import java.util.Objects;
@@ -24,6 +24,8 @@ import org.openide.filesystems.FileUtil;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.AbstractBaseAction;
 
 /**
  * Base class for closing project related tabs actions.
@@ -40,7 +42,7 @@ abstract class AbstractProjectBaseAction extends AbstractBaseAction {
 	 * @param name the name of this action
 	 * @param initialClose flag indicating to close all tabs with the same ({@code true}) or all tabs with a different ({@code false}) project
 	 */
-	AbstractProjectBaseAction(TopComponent topComponent, String name, boolean initialClose) {
+	public AbstractProjectBaseAction(TopComponent topComponent, String name, boolean initialClose) {
 		super(topComponent, name, initialClose);
 	}
 

@@ -31,6 +31,6 @@ public class Installer extends Yenta {
 
 	@Override
 	protected Set<String> siblings() {
-		return new HashSet<>(Arrays.asList("org.netbeans.core.windows", "org.netbeans.modules.subversion", "org.netbeans.modules.mercurial"));
+		return new HashSet<>(Arrays.asList("org.netbeans.core.windows", "org.netbeans.modules.git", "org.netbeans.modules.subversion", "org.netbeans.modules.mercurial"));
 	}
 }
