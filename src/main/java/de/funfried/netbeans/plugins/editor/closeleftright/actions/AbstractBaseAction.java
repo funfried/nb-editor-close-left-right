@@ -40,7 +40,7 @@ public abstract class AbstractBaseAction extends AbstractAction {
 	protected final boolean initialClose;
 
 	/**
-	 * Constructor of abstract class {@link ActionBase}.
+	 * Constructor of abstract class {@link AbstractBaseAction}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
