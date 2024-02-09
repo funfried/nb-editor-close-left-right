@@ -163,6 +163,12 @@
 
 		<dependency>
 			<groupId>org.netbeans.modules</groupId>
+			<artifactId>org-netbeans-modules-git</artifactId>
+			<version>${netbeans.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netbeans.modules</groupId>
 			<artifactId>org-netbeans-modules-subversion</artifactId>
 			<version>${netbeans.version}</version>
 			<exclusions>
@@ -287,7 +293,7 @@
 						<dependency>
 							<groupId>org.apache.maven.skins</groupId>
 							<artifactId>maven-fluido-skin</artifactId>
-							<version>1.11.2</version>
+							<version>1.12.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>

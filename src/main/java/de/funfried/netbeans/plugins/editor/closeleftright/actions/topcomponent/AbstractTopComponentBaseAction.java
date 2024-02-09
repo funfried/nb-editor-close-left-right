@@ -11,46 +11,42 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
 /**
- * Base class for closing left or right tabs actions.
+ * Base class for closing tabs with specific TopComponent implementations related actions.
  *
  * @author bahlef
  */
-abstract class AbstractBaseAction extends AbstractAction {
-	private static final long serialVersionUID = -8499198129424546354L;
+abstract class AbstractTopComponentBaseAction extends AbstractAction {
+	private static final long serialVersionUID = 4175615224177055417L;
 
-	private static final Logger log = Logger.getLogger(AbstractBaseAction.class.getName());
+	protected final Class<? extends TopComponent>[] topComponentTypes;
 
 	/** the related {@link TopComponent} of this action. */
 	protected final TopComponent topComponent;
-
-	/** Flag indicating to close all left or all right tabs. */
-	protected final boolean initialClose;
 
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
-	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
+	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
 	 */
-	AbstractBaseAction(TopComponent topComponent, String name, boolean initialClose) {
+	AbstractTopComponentBaseAction(TopComponent topComponent, String name, Class<? extends TopComponent>... topComponentTypes) {
 		super(name);
 
+		this.topComponentTypes = topComponentTypes;
 		this.topComponent = topComponent;
-		this.initialClose = initialClose;
 	}
 
 	/**
@@ -63,14 +59,8 @@ abstract class AbstractBaseAction extends AbstractAction {
 			return;
 		}
 
-		boolean close = initialClose;
 		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == topComponent) {
-				close = !close;
-				continue;
-			}
-
-			if (close && tc.isOpened()) {
+			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
 				tc.close();
 			}
 		}
@@ -83,21 +73,22 @@ abstract class AbstractBaseAction extends AbstractAction {
 			return false;
 		}
 
-		boolean close = initialClose;
+		for (TopComponent tc : mode.getTopComponents()) {
+			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
+				return true;
+			}
+		}
 
-		try {
-			for (TopComponent tc : mode.getTopComponents()) {
-				if (tc == topComponent) {
-					close = !close;
-					continue;
-				}
+		return false;
+	}
 
-				if (close && tc.isOpened()) {
+	protected boolean isAssignableFromGivenTypes(Class<? extends TopComponent> topComponentClass) {
+		if (topComponentClass != null && ArrayUtils.isNotEmpty(topComponentTypes)) {
+			for (Class<? extends TopComponent> topComponentType : topComponentTypes) {
+				if (topComponentClass.isAssignableFrom(topComponentType)) {
 					return true;
 				}
 			}
-		} catch (Exception ex) {
-			log.log(Level.WARNING, NAME, ex);
 		}
 
 		return false;

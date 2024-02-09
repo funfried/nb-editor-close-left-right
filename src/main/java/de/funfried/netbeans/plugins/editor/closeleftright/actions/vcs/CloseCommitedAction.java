@@ -11,27 +11,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.funfried.netbeans.plugins.editor.closeleftright;
+package de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs;
 
 import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 /**
- * Close right editor tab context menu action.
+ * Close left editor tab context menu action.
  *
- * @author Alexander Yastrebov
+ * @author bahlef
  */
-@Messages("CTL_CloseRightAction=Close Right")
-public class CloseRightAction extends AbstractBaseAction {
-	private static final long serialVersionUID = -8970638174416914392L;
+@Messages("CTL_CloseCommitedAction=Close All Commited")
+public class CloseCommitedAction extends AbstractVcsBaseAction {
+	private static final long serialVersionUID = -1294837770606016114L;
 
 	/**
-	 * Creates a new instance of {@link CloseRightAction}.
+	 * Creates a new instance of {@link CloseCommitedAction}.
 	 *
 	 * @param topComponent the related {@link TopComponent} of this action
 	 */
-	public CloseRightAction(TopComponent topComponent) {
-		super(topComponent, NbBundle.getMessage(CloseRightAction.class, "CTL_CloseRightAction"), false);
+	public CloseCommitedAction(TopComponent topComponent) {
+		super(topComponent, NbBundle.getMessage(CloseCommitedAction.class, "CTL_CloseCommitedAction"));
 	}
 }
