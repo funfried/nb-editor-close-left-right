@@ -15,38 +15,33 @@ package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractAction;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.AbstractBaseAction;
 
 /**
  * Base class for closing tabs with specific TopComponent implementations related actions.
  *
  * @author bahlef
  */
-abstract class AbstractTopComponentBaseAction extends AbstractAction {
+abstract class AbstractTopComponentBaseAction extends AbstractBaseAction {
 	private static final long serialVersionUID = 4175615224177055417L;
 
 	protected final Class<? extends TopComponent>[] topComponentTypes;
 
-	/** the related {@link TopComponent} of this action. */
-	protected final TopComponent topComponent;
-
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
-	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
 	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
 	 */
-	AbstractTopComponentBaseAction(TopComponent topComponent, String name, Class<? extends TopComponent>... topComponentTypes) {
+	AbstractTopComponentBaseAction(String name, Class<? extends TopComponent>... topComponentTypes) {
 		super(name);
 
 		this.topComponentTypes = topComponentTypes;
-		this.topComponent = topComponent;
 	}
 
 	/**
@@ -54,28 +49,32 @@ abstract class AbstractTopComponentBaseAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		Mode mode = WindowManager.getDefault().findMode(topComponent);
-		if (mode == null) {
-			return;
-		}
+		if (topComponent != null) {
+			Mode mode = WindowManager.getDefault().findMode(topComponent);
+			if (mode == null) {
+				return;
+			}
 
-		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
-				tc.close();
+			for (TopComponent tc : mode.getTopComponents()) {
+				if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
+					tc.close();
+				}
 			}
 		}
 	}
 
 	@Override
 	public boolean isEnabled() {
-		Mode mode = WindowManager.getDefault().findMode(topComponent);
-		if (mode == null) {
-			return false;
-		}
+		if (topComponent != null) {
+			Mode mode = WindowManager.getDefault().findMode(topComponent);
+			if (mode == null) {
+				return false;
+			}
 
-		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
-				return true;
+			for (TopComponent tc : mode.getTopComponents()) {
+				if (tc.isOpened() && isAssignableFromGivenTypes(tc.getClass())) {
+					return true;
+				}
 			}
 		}
 

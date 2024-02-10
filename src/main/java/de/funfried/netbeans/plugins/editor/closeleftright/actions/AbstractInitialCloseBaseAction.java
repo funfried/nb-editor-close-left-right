@@ -17,24 +17,21 @@ import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.AbstractAction;
-
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.AbstractBaseAction;
 
 /**
  * Base class for closing left or right tabs actions.
  *
  * @author bahlef
  */
-public abstract class AbstractBaseAction extends AbstractAction {
+public abstract class AbstractInitialCloseBaseAction extends AbstractBaseAction {
 	private static final long serialVersionUID = -8499198129424546354L;
 
-	private static final Logger log = Logger.getLogger(AbstractBaseAction.class.getName());
-
-	/** the related {@link TopComponent} of this action. */
-	protected final TopComponent topComponent;
+	private static final Logger log = Logger.getLogger(AbstractInitialCloseBaseAction.class.getName());
 
 	/** Flag indicating to close all left or all right tabs. */
 	protected final boolean initialClose;
@@ -42,14 +39,12 @@ public abstract class AbstractBaseAction extends AbstractAction {
 	/**
 	 * Constructor of abstract class {@link AbstractBaseAction}.
 	 *
-	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
 	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
 	 */
-	protected AbstractBaseAction(TopComponent topComponent, String name, boolean initialClose) {
+	protected AbstractInitialCloseBaseAction(String name, boolean initialClose) {
 		super(name);
 
-		this.topComponent = topComponent;
 		this.initialClose = initialClose;
 	}
 
@@ -58,34 +53,13 @@ public abstract class AbstractBaseAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		Mode mode = WindowManager.getDefault().findMode(topComponent);
-		if (mode == null) {
-			return;
-		}
-
-		boolean close = initialClose;
-		for (TopComponent tc : mode.getTopComponents()) {
-			if (tc == topComponent) {
-				close = !close;
-				continue;
+		if (topComponent != null) {
+			Mode mode = WindowManager.getDefault().findMode(topComponent);
+			if (mode == null) {
+				return;
 			}
 
-			if (close && tc.isOpened()) {
-				tc.close();
-			}
-		}
-	}
-
-	@Override
-	public boolean isEnabled() {
-		Mode mode = WindowManager.getDefault().findMode(topComponent);
-		if (mode == null) {
-			return false;
-		}
-
-		boolean close = initialClose;
-
-		try {
+			boolean close = initialClose;
 			for (TopComponent tc : mode.getTopComponents()) {
 				if (tc == topComponent) {
 					close = !close;
@@ -93,11 +67,36 @@ public abstract class AbstractBaseAction extends AbstractAction {
 				}
 
 				if (close && tc.isOpened()) {
-					return true;
+					tc.close();
 				}
 			}
-		} catch (Exception ex) {
-			log.log(Level.WARNING, NAME, ex);
+		}
+	}
+
+	@Override
+	public boolean isEnabled() {
+		if (topComponent != null) {
+			Mode mode = WindowManager.getDefault().findMode(topComponent);
+			if (mode == null) {
+				return false;
+			}
+
+			boolean close = initialClose;
+
+			try {
+				for (TopComponent tc : mode.getTopComponents()) {
+					if (tc == topComponent) {
+						close = !close;
+						continue;
+					}
+
+					if (close && tc.isOpened()) {
+						return true;
+					}
+				}
+			} catch (Exception ex) {
+				log.log(Level.WARNING, NAME, ex);
+			}
 		}
 
 		return false;

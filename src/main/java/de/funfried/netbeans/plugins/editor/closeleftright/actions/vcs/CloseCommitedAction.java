@@ -15,7 +15,9 @@ package de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs;
 
 import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
-import org.openide.windows.TopComponent;
+import org.openide.util.lookup.ServiceProvider;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
 
 /**
  * Close left editor tab context menu action.
@@ -23,15 +25,24 @@ import org.openide.windows.TopComponent;
  * @author bahlef
  */
 @Messages("CTL_CloseCommitedAction=Close All Commited")
-public class CloseCommitedAction extends AbstractVcsBaseAction {
+@ServiceProvider(service = AdditionalCloseAction.class, position = 500)
+public class CloseCommitedAction extends AbstractVcsBaseAction implements AdditionalCloseAction {
 	private static final long serialVersionUID = -1294837770606016114L;
 
 	/**
 	 * Creates a new instance of {@link CloseCommitedAction}.
-	 *
-	 * @param topComponent the related {@link TopComponent} of this action
 	 */
-	public CloseCommitedAction(TopComponent topComponent) {
-		super(topComponent, NbBundle.getMessage(CloseCommitedAction.class, "CTL_CloseCommitedAction"));
+	public CloseCommitedAction() {
+		super(NbBundle.getMessage(CloseCommitedAction.class, "CTL_CloseCommitedAction"));
+	}
+
+	@Override
+	public String getId() {
+		return "closeCommitedAction";
+	}
+
+	@Override
+	public boolean isGlobalAction() {
+		return false;
 	}
 }

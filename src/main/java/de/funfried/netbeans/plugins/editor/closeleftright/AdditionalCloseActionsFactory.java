@@ -13,11 +13,7 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent.CloseDiffTopComponentsAction;
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent.CloseSearchHistoryTopComponentsAction;
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs.CloseCommitedAction;
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.project.CloseOtherProjectTabsAction;
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.project.CloseSameProjectTabsAction;
+import java.util.Collection;
 
 import javax.swing.Action;
 
@@ -25,13 +21,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.netbeans.core.windows.actions.ActionsFactory;
 import org.netbeans.core.windows.actions.CloseAllButThisAction;
 import org.netbeans.core.windows.actions.CloseModeAction;
+import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
-
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.CloseLeftAction;
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.CloseRightAction;
 
 /**
  *
@@ -39,6 +33,12 @@ import de.funfried.netbeans.plugins.editor.closeleftright.actions.CloseRightActi
  */
 @ServiceProvider(service = ActionsFactory.class, position = Integer.MAX_VALUE)
 public class AdditionalCloseActionsFactory extends ActionsFactory {
+	private final Collection<? extends AdditionalCloseAction> additionalCloseActions;
+
+	public AdditionalCloseActionsFactory() {
+		additionalCloseActions = Lookup.getDefault().lookupAll(AdditionalCloseAction.class);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -58,10 +58,15 @@ public class AdditionalCloseActionsFactory extends ActionsFactory {
 	private Action[] addCloseLeftRightActions(TopComponent tc, Mode mode, Action[] actions) {
 		boolean isEditorTc = mode != null && mode.getName().equalsIgnoreCase("editor");
 
-		Action[] actionsToAdd = new Action[] { new CloseLeftAction(tc), new CloseRightAction(tc) };
-		if (isEditorTc) {
-			actionsToAdd = ArrayUtils.addAll(actionsToAdd, new CloseSameProjectTabsAction(tc), new CloseOtherProjectTabsAction(tc), new CloseCommitedAction(tc), new CloseDiffTopComponentsAction(tc),
-					new CloseSearchHistoryTopComponentsAction(tc));
+		Action[] actionsToAdd = new Action[0];
+		for (AdditionalCloseAction additionalCloseAction : additionalCloseActions) {
+			additionalCloseAction.setTopComponent(null);
+
+			if (additionalCloseAction.isActive() && (isEditorTc || additionalCloseAction.isGlobalAction())) {
+				additionalCloseAction.setTopComponent(tc);
+
+				actionsToAdd = ArrayUtils.add(actionsToAdd, additionalCloseAction);
+			}
 		}
 
 		for (int i = 0; i < actions.length; i++) {
