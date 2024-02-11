@@ -13,9 +13,8 @@
 			<p>
 				This is the project page of the <a href="https://netbeans.apache.org">NetBeans IDE</a> plugin
 				<i>Close Editor Tabs Left and Right Plugin for Netbeans</i>. This plugin helps you to easily
-				close unused or unwanted editor tabs in the NetBeans IDE. Instead of either close all tabs
-				or all tabs except the currently selected you can also close the tabs right or left from
-				the context menu of a selected tab at once.
+				close unused or unwanted editor tabs to keep a better overview of your work. Instead of either
+				close all tabs or all tabs except the currently selected you get a bunch of extra close actions.
 			</p>
 			<subsection name="Compatibility">
 				<p>
@@ -25,7 +24,10 @@
 		</section>
 		<section name="Current features">
 			<ul>
-				<li>Close all editor tabs right or left from the context menu of a selected tab at once</li>
+				<li>Adds a context menu action which lets the user close all editor tabs at once that are right or left of the selected tab.</li>
+				<li>Adds a context menu action which lets the user close all editor tabs at once that belong or which not belong to the same project of the selected tab.</li>
+				<li>Adds a context menu action which lets the user close all editor tabs at once that have not been commited to their version control system (Git, SVN and Mercurial supported).</li>
+				<li>Adds a context menu action which lets the user close all version control "Diff" or "Search History" editor tabs at once (Git, SVN and Mercurial supported).</li>
 			</ul>
 		</section>
 		<section name="History of this plugin">

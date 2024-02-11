@@ -25,25 +25,24 @@ import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
-import de.funfried.netbeans.plugins.editor.closeleftright.actions.AbstractBaseAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.actions.AbstractInitialCloseBaseAction;
 
 /**
  * Base class for closing project related tabs actions.
  *
  * @author bahlef
  */
-abstract class AbstractProjectBaseAction extends AbstractBaseAction {
+abstract class AbstractProjectBaseAction extends AbstractInitialCloseBaseAction {
 	private static final long serialVersionUID = 5322225046091709258L;
 
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
-	 * @param topComponent the related {@link TopComponent} of this action
 	 * @param name the name of this action
 	 * @param initialClose flag indicating to close all tabs with the same ({@code true}) or all tabs with a different ({@code false}) project
 	 */
-	public AbstractProjectBaseAction(TopComponent topComponent, String name, boolean initialClose) {
-		super(topComponent, name, initialClose);
+	public AbstractProjectBaseAction(String name, boolean initialClose) {
+		super(name, initialClose);
 	}
 
 	/**
