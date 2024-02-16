@@ -9,6 +9,18 @@
 	</properties>
 
 	<body>
+		<release version="1.0.5-SNAPSHOT" date="n/a" description="More close actions and options panel">
+			<action dev="bahlef" type="add" issue="22">
+				Added action to close versioning diff editor tabs.
+			</action>
+			<action dev="bahlef" type="add">
+				Added action to close versioning search history editor tabs.
+			</action>
+			<action dev="bahlef" type="add" issue="22">
+				Added options panel so a user can select which additional close actions should be shown or not.
+			</action>
+		</release>
+
 		<release version="1.0.4" date="2023-08-10" description="Fixed new close actions">
 			<action dev="bahlef" type="fix" issue="17">
 				Fixed new VCS and project actions.
