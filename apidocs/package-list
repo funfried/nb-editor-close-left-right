@@ -1,2 +1,7 @@
 de.funfried.netbeans.plugins.editor.closeleftright
+de.funfried.netbeans.plugins.editor.closeleftright.actions
+de.funfried.netbeans.plugins.editor.closeleftright.actions.project
+de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent
+de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs
+de.funfried.netbeans.plugins.editor.closeleftright.options
 de.funfried.netbeans.plugins.editor.closeleftright.vcs
