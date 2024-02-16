@@ -6,7 +6,7 @@
 [![GitHub All Releases](https://img.shields.io/github/downloads/funfried/nb-editor-close-left-right/total)](https://github.com/funfried/nb-editor-close-left-right/releases)
 [![GitHub issues](https://img.shields.io/github/issues/funfried/nb-editor-close-left-right)](https://github.com/funfried/nb-editor-close-left-right/issues)
 [![Apache License, Version 2.0](https://img.shields.io/github/license/funfried/nb-editor-close-left-right)](http://funfried.github.io/nb-editor-close-left-right/licenses.html)
-[![Follow Me On Twitter](https://img.shields.io/twitter/follow/funfried84?style=social)](https://twitter.com/funfried84)
+[![Follow Me On X/Twitter](https://img.shields.io/twitter/follow/funfried84?style=social)](https://twitter.com/funfried84)
 
 Close Editor Tabs Left and Right Plugin for Netbeans
 ================================================
@@ -21,6 +21,9 @@ Instead of either close all tabs or all tabs except the currently selected you g
 *   Adds a context menu action which lets the user close all editor tabs at once that belong or which not belong to the same project of the selected tab.
 *   Adds a context menu action which lets the user close all editor tabs at once that have not been commited to their version control system (Git, SVN and Mercurial supported).
 *   Adds a context menu action which lets the user close all version control "Diff" or "Search History" editor tabs at once (Git, SVN and Mercurial supported).
+
+![Context menu with installed plugin](/src/site/resources/imgs/editor_tab_contextmenu.png)
+![Options](/src/site/resources/imgs/close_actions_options.png)
 
 Compatibility
 -------------
