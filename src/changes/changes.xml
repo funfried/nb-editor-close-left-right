@@ -9,7 +9,7 @@
 	</properties>
 
 	<body>
-		<release version="1.0.5-SNAPSHOT" date="n/a" description="More close actions and options panel">
+		<release version="1.0.5" date="2024-02-27" description="More close actions and options panel">
 			<action dev="bahlef" type="add" issue="22">
 				Added action to close versioning diff editor tabs.
 			</action>
