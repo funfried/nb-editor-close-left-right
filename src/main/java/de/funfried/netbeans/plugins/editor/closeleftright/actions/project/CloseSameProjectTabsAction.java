@@ -13,36 +13,23 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright.actions.project;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.ServiceProvider;
-
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
+import org.openide.windows.TopComponent;
 
 /**
  * Close left editor tab context menu action.
  *
  * @author bahlef
  */
-@Messages("CTL_CloseSameProjectTabsAction=Close All From Same Project")
-@ServiceProvider(service = AdditionalCloseAction.class, position = 300)
-public class CloseSameProjectTabsAction extends AbstractProjectBaseAction implements AdditionalCloseAction {
+public class CloseSameProjectTabsAction extends AbstractProjectBaseAction {
 	private static final long serialVersionUID = -7858355126214500476L;
 
 	/**
 	 * Creates a new instance of {@link CloseSameProjectTabsAction}.
+	 *
+	 * @param name the name of the action
+	 * @param topComponent the {@link TopComponent}
 	 */
-	public CloseSameProjectTabsAction() {
-		super(NbBundle.getMessage(CloseSameProjectTabsAction.class, "CTL_CloseSameProjectTabsAction"), true);
-	}
-
-	@Override
-	public String getId() {
-		return "closeSameProjectTabsAction";
-	}
-
-	@Override
-	public boolean isGlobalAction() {
-		return false;
+	CloseSameProjectTabsAction(String name, TopComponent topComponent) {
+		super(name, topComponent, true);
 	}
 }

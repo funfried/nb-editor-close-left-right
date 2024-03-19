@@ -14,6 +14,7 @@
 package de.funfried.netbeans.plugins.editor.closeleftright.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,10 +41,11 @@ public abstract class AbstractInitialCloseBaseAction extends AbstractBaseAction 
 	 * Constructor of abstract class {@link AbstractBaseAction}.
 	 *
 	 * @param name the name of this action
+	 * @param topComponent the {@link TopComponent}
 	 * @param initialClose flag indicating to close all left ({@code true}) or all right ({@code false}) tabs
 	 */
-	protected AbstractInitialCloseBaseAction(String name, boolean initialClose) {
-		super(name);
+	protected AbstractInitialCloseBaseAction(String name, TopComponent topComponent, boolean initialClose) {
+		super(name, topComponent);
 
 		this.initialClose = initialClose;
 	}
@@ -53,50 +55,46 @@ public abstract class AbstractInitialCloseBaseAction extends AbstractBaseAction 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (topComponent != null) {
-			Mode mode = WindowManager.getDefault().findMode(topComponent);
-			if (mode == null) {
-				return;
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
+		if (mode == null) {
+			return;
+		}
+
+		boolean close = initialClose;
+		for (TopComponent tc : mode.getTopComponents()) {
+			if (Objects.equals(tc, topComponent)) {
+				close = !close;
+				continue;
 			}
 
-			boolean close = initialClose;
-			for (TopComponent tc : mode.getTopComponents()) {
-				if (tc == topComponent) {
-					close = !close;
-					continue;
-				}
-
-				if (close && tc.isOpened()) {
-					tc.close();
-				}
+			if (close && tc.isOpened()) {
+				tc.close();
 			}
 		}
 	}
 
 	@Override
 	public boolean isEnabled() {
-		if (topComponent != null) {
-			Mode mode = WindowManager.getDefault().findMode(topComponent);
-			if (mode == null) {
-				return false;
-			}
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
+		if (mode == null) {
+			return false;
+		}
 
-			boolean close = initialClose;
+		boolean close = initialClose;
 
-			try {
-				for (TopComponent tc : mode.getTopComponents()) {
-					if (tc == topComponent) {
-						close = !close;
-						continue;
-					}
-
-					if (close && tc.isOpened()) {
-						return true;
-					}
+		try {
+			for (TopComponent tc : mode.getTopComponents()) {
+				if (Objects.equals(tc, topComponent)) {
+					close = !close;
+					continue;
 				}
-			} catch (Exception ex) {
-				log.log(Level.WARNING, NAME, ex);
+
+				if (close && tc.isOpened()) {
+					return true;
+				}
 			}
+		} catch (Exception ex) {
+			log.log(Level.WARNING, NAME, ex);
 		}
 
 		return false;

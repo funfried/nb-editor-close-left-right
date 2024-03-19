@@ -13,38 +13,19 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.ServiceProvider;
-
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
-
 /**
  * Close VCS search history editor tab context menu action.
  *
  * @author bahlef
  */
-@Messages("CTL_CloseSearchHistoryTopComponentsAction=Close VCS Search History Tabs")
-@ServiceProvider(service = AdditionalCloseAction.class, position = 700)
-public class CloseSearchHistoryTopComponentsAction extends AbstractTopComponentBaseAction implements AdditionalCloseAction {
+public class CloseSearchHistoryTopComponentsAction extends AbstractTopComponentBaseAction {
 	private static final long serialVersionUID = 1132788229885401011L;
 
 	/**
 	 * Creates a new instance of {@link CloseSearchHistoryTopComponentsAction}.
 	 */
-	public CloseSearchHistoryTopComponentsAction() {
-		super(NbBundle.getMessage(CloseSearchHistoryTopComponentsAction.class, "CTL_CloseSearchHistoryTopComponentsAction"),
-				org.netbeans.modules.git.ui.history.SearchHistoryTopComponent.class, org.netbeans.modules.subversion.ui.history.SearchHistoryTopComponent.class,
+	CloseSearchHistoryTopComponentsAction(String name) {
+		super(name, org.netbeans.modules.git.ui.history.SearchHistoryTopComponent.class, org.netbeans.modules.subversion.ui.history.SearchHistoryTopComponent.class,
 				org.netbeans.modules.mercurial.ui.log.SearchHistoryTopComponent.class);
-	}
-
-	@Override
-	public String getId() {
-		return "closeSearchHistoryTopComponentsAction";
-	}
-
-	@Override
-	public boolean isGlobalAction() {
-		return false;
 	}
 }

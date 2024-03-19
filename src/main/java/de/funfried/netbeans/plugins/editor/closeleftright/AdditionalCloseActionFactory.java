@@ -5,7 +5,7 @@
 
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
-import javax.swing.Action;
+import javax.swing.AbstractAction;
 
 import org.openide.windows.TopComponent;
 
@@ -13,7 +13,7 @@ import org.openide.windows.TopComponent;
  *
  * @author fbahle
  */
-public interface AdditionalCloseAction extends Action {
+public interface AdditionalCloseActionFactory {
 	String getId();
 
 	String getName();
@@ -24,5 +24,5 @@ public interface AdditionalCloseAction extends Action {
 
 	boolean isGlobalAction();
 
-	void setTopComponent(TopComponent topComponent);
+	AbstractAction createAction(TopComponent topComponent);
 }

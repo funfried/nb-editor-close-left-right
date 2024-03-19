@@ -13,37 +13,20 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright.actions.topcomponent;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.ServiceProvider;
-
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
-
 /**
  * Close VCS diff editor tab context menu action.
  *
  * @author bahlef
  */
-@Messages("CTL_CloseDiffTopComponentsAction=Close VCS Diff Tabs")
-@ServiceProvider(service = AdditionalCloseAction.class, position = 600)
-public class CloseDiffTopComponentsAction extends AbstractTopComponentBaseAction implements AdditionalCloseAction {
+public class CloseDiffTopComponentsAction extends AbstractTopComponentBaseAction {
 	private static final long serialVersionUID = 8838158102777470061L;
 
 	/**
 	 * Creates a new instance of {@link CloseDiffTopComponentsAction}.
+	 *
+	 * @param name the name of the action
 	 */
-	public CloseDiffTopComponentsAction() {
-		super(NbBundle.getMessage(CloseDiffTopComponentsAction.class, "CTL_CloseDiffTopComponentsAction"), org.netbeans.modules.git.ui.diff.DiffTopComponent.class,
-				org.netbeans.modules.subversion.ui.diff.DiffTopComponent.class, org.netbeans.modules.mercurial.ui.diff.DiffTopComponent.class);
-	}
-
-	@Override
-	public String getId() {
-		return "closeDiffTopComponentsAction";
-	}
-
-	@Override
-	public boolean isGlobalAction() {
-		return false;
+	CloseDiffTopComponentsAction(String name) {
+		super(name, org.netbeans.modules.git.ui.diff.DiffTopComponent.class, org.netbeans.modules.subversion.ui.diff.DiffTopComponent.class, org.netbeans.modules.mercurial.ui.diff.DiffTopComponent.class);
 	}
 }

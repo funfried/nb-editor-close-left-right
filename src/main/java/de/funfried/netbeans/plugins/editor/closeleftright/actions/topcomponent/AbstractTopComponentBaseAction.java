@@ -39,7 +39,7 @@ abstract class AbstractTopComponentBaseAction extends AbstractBaseAction {
 	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
 	 */
 	AbstractTopComponentBaseAction(String name, Class<? extends TopComponent>... topComponentTypes) {
-		super(name);
+		super(name, null);
 
 		this.topComponentTypes = topComponentTypes;
 	}

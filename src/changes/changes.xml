@@ -10,6 +10,9 @@
 
 	<body>
 		<release version="1.0.6-SNAPSHOT" date="tbd" description="tbd">
+			<action dev="bahlef" type="fix" issue="32">
+				Fixed close left action which closed all tabs instead of only the left tabs of the selected tab.
+			</action>
 		</release>
 
 		<release version="1.0.5" date="2024-02-27" description="More close actions and options panel">
