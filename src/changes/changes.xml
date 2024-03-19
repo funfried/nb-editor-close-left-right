@@ -9,7 +9,7 @@
 	</properties>
 
 	<body>
-		<release version="1.0.6-SNAPSHOT" date="tbd" description="tbd">
+		<release version="1.0.6" date="2024-03-19" description="Hotfix release">
 			<action dev="bahlef" type="fix" issue="32">
 				Fixed close left action which closed all tabs instead of only the left tabs of the selected tab.
 			</action>
