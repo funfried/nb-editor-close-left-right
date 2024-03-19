@@ -13,36 +13,79 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright.actions.vcs;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.ServiceProvider;
+import java.awt.event.ActionEvent;
 
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
+import org.openide.filesystems.FileObject;
+import org.openide.windows.Mode;
+import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
+
+import de.funfried.netbeans.plugins.editor.closeleftright.AbstractBaseAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.GitUtils;
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.HgUtils;
+import de.funfried.netbeans.plugins.editor.closeleftright.vcs.SvnUtils;
 
 /**
  * Close left editor tab context menu action.
  *
  * @author bahlef
  */
-@Messages("CTL_CloseCommitedAction=Close All Commited")
-@ServiceProvider(service = AdditionalCloseAction.class, position = 500)
-public class CloseCommitedAction extends AbstractVcsBaseAction implements AdditionalCloseAction {
+public class CloseCommitedAction extends AbstractBaseAction {
 	private static final long serialVersionUID = -1294837770606016114L;
 
 	/**
 	 * Creates a new instance of {@link CloseCommitedAction}.
 	 */
-	public CloseCommitedAction() {
-		super(NbBundle.getMessage(CloseCommitedAction.class, "CTL_CloseCommitedAction"));
+	CloseCommitedAction(String name, TopComponent topComponent) {
+		super(name, topComponent);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
+		if (mode == null) {
+			return;
+		}
+
+		for (TopComponent tc : mode.getTopComponents()) {
+			if (tc.isOpened()) {
+				FileObject fileObject = tc.getLookup().lookup(FileObject.class);
+				if (fileObject != null) {
+					Boolean gitModified = GitUtils.isModified(fileObject);
+					Boolean svnModified = SvnUtils.isModified(fileObject);
+					Boolean hgModified = HgUtils.isModified(fileObject);
+
+					if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
+						tc.close();
+					}
+				}
+			}
+		}
 	}
 
 	@Override
-	public String getId() {
-		return "closeCommitedAction";
-	}
+	public boolean isEnabled() {
+		Mode mode = WindowManager.getDefault().findMode(topComponent);
+		if (mode == null) {
+			return false;
+		}
 
-	@Override
-	public boolean isGlobalAction() {
+		for (TopComponent tc : mode.getTopComponents()) {
+			FileObject fileObject = tc.getLookup().lookup(FileObject.class);
+			if (fileObject != null) {
+				Boolean gitModified = GitUtils.isModified(fileObject);
+				Boolean svnModified = SvnUtils.isModified(fileObject);
+				Boolean hgModified = HgUtils.isModified(fileObject);
+
+				if (!Boolean.TRUE.equals(gitModified) && !Boolean.TRUE.equals(svnModified) && !Boolean.TRUE.equals(hgModified)) {
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 }

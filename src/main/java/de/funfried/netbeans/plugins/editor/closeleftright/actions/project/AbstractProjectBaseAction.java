@@ -41,8 +41,8 @@ abstract class AbstractProjectBaseAction extends AbstractInitialCloseBaseAction 
 	 * @param name the name of this action
 	 * @param initialClose flag indicating to close all tabs with the same ({@code true}) or all tabs with a different ({@code false}) project
 	 */
-	public AbstractProjectBaseAction(String name, boolean initialClose) {
-		super(name, initialClose);
+	public AbstractProjectBaseAction(String name, TopComponent topComponent, boolean initialClose) {
+		super(name, topComponent, initialClose);
 	}
 
 	/**

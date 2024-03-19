@@ -33,10 +33,10 @@ import org.openide.windows.WindowManager;
  */
 @ServiceProvider(service = ActionsFactory.class, position = Integer.MAX_VALUE)
 public class AdditionalCloseActionsFactory extends ActionsFactory {
-	private final Collection<? extends AdditionalCloseAction> additionalCloseActions;
+	private final Collection<? extends AdditionalCloseActionFactory> additionalCloseActionFactories;
 
 	public AdditionalCloseActionsFactory() {
-		additionalCloseActions = Lookup.getDefault().lookupAll(AdditionalCloseAction.class);
+		additionalCloseActionFactories = Lookup.getDefault().lookupAll(AdditionalCloseActionFactory.class);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class AdditionalCloseActionsFactory extends ActionsFactory {
 	 */
 	@Override
 	public Action[] createPopupActions(TopComponent tc, Action[] actions) {
-		return addCloseLeftRightActions(tc, WindowManager.getDefault().findMode(tc), actions);
+		return addAdditionalActions(tc, WindowManager.getDefault().findMode(tc), actions);
 	}
 
 	/**
@@ -52,20 +52,16 @@ public class AdditionalCloseActionsFactory extends ActionsFactory {
 	 */
 	@Override
 	public Action[] createPopupActions(Mode mode, Action[] actions) {
-		return addCloseLeftRightActions(mode.getSelectedTopComponent(), mode, actions);
+		return addAdditionalActions(mode.getSelectedTopComponent(), mode, actions);
 	}
 
-	private Action[] addCloseLeftRightActions(TopComponent tc, Mode mode, Action[] actions) {
+	private Action[] addAdditionalActions(TopComponent tc, Mode mode, Action[] actions) {
 		boolean isEditorTc = mode != null && mode.getName().equalsIgnoreCase("editor");
 
 		Action[] actionsToAdd = new Action[0];
-		for (AdditionalCloseAction additionalCloseAction : additionalCloseActions) {
-			additionalCloseAction.setTopComponent(null);
-
-			if (additionalCloseAction.isActive() && (isEditorTc || additionalCloseAction.isGlobalAction())) {
-				additionalCloseAction.setTopComponent(tc);
-
-				actionsToAdd = ArrayUtils.add(actionsToAdd, additionalCloseAction);
+		for (AdditionalCloseActionFactory additionalCloseActionFactory : additionalCloseActionFactories) {
+			if (additionalCloseActionFactory.isActive() && (isEditorTc || additionalCloseActionFactory.isGlobalAction())) {
+				actionsToAdd = ArrayUtils.add(actionsToAdd, additionalCloseActionFactory.createAction(tc));
 			}
 		}
 

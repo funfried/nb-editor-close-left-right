@@ -13,15 +13,10 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 
-import org.openide.util.NbPreferences;
 import org.openide.windows.TopComponent;
 
 /**
@@ -35,39 +30,17 @@ public abstract class AbstractBaseAction extends AbstractAction {
 	private static final Logger log = Logger.getLogger(AbstractBaseAction.class.getName());
 
 	/** the related {@link TopComponent} of this action. */
-	protected TopComponent topComponent;
+	protected final TopComponent topComponent;
 
 	/**
 	 * Constructor of abstract class {@link AbstractBaseAction}.
 	 *
 	 * @param name the name of this action
+	 * @param topComponent the {@link TopComponent}
 	 */
-	protected AbstractBaseAction(String name) {
+	protected AbstractBaseAction(String name, TopComponent topComponent) {
 		super(name);
-	}
 
-	public abstract String getId();
-
-	public String getName() {
-		return (String) getValue(Action.NAME);
-	}
-
-	public boolean isActive() {
-		return NbPreferences.forModule(AbstractBaseAction.class).getBoolean(getId(), true);
-	}
-
-	public void setActive(boolean active) {
-		Preferences prefs = NbPreferences.forModule(AbstractBaseAction.class);
-		prefs.putBoolean(getId(), active);
-
-		try {
-			prefs.flush();
-		} catch (BackingStoreException ex) {
-			log.log(Level.WARNING, "Could not flush active flag", ex);
-		}
-	}
-
-	public void setTopComponent(TopComponent topComponent) {
 		this.topComponent = topComponent;
 	}
 }

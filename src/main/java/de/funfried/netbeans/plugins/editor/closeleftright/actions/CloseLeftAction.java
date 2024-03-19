@@ -13,36 +13,23 @@
  */
 package de.funfried.netbeans.plugins.editor.closeleftright.actions;
 
-import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.ServiceProvider;
-
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
+import org.openide.windows.TopComponent;
 
 /**
  * Close left editor tab context menu action.
  *
  * @author Alexander Yastrebov
  */
-@Messages("CTL_CloseLeftAction=Close Left")
-@ServiceProvider(service = AdditionalCloseAction.class, position = 100)
-public class CloseLeftAction extends AbstractInitialCloseBaseAction implements AdditionalCloseAction {
+public class CloseLeftAction extends AbstractInitialCloseBaseAction {
 	private static final long serialVersionUID = -6948129193867379695L;
 
 	/**
 	 * Creates a new instance of {@link CloseLeftAction}.
+	 *
+	 * @param name the name of the action
+	 * @param topComponent the {@link TopComponent}
 	 */
-	public CloseLeftAction() {
-		super(NbBundle.getMessage(CloseLeftAction.class, "CTL_CloseLeftAction"), true);
-	}
-
-	@Override
-	public String getId() {
-		return "closeLeftAction";
-	}
-
-	@Override
-	public boolean isGlobalAction() {
-		return true;
+	CloseLeftAction(String name, TopComponent topComponent) {
+		super(name, topComponent, true);
 	}
 }

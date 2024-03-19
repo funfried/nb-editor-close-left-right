@@ -16,12 +16,12 @@ import javax.swing.event.ChangeListener;
 import org.openide.util.ChangeSupport;
 import org.openide.util.Lookup;
 
-import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseAction;
+import de.funfried.netbeans.plugins.editor.closeleftright.AdditionalCloseActionFactory;
 
 final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
 	private static final long serialVersionUID = 4588982272030513399L;
 
-	private final Map<AdditionalCloseAction, JCheckBox> actionChkBoxes = new HashMap<>();
+	private final Map<AdditionalCloseActionFactory, JCheckBox> actionChkBoxes = new HashMap<>();
 
 	/** {@link ChangeSupport} to notify about changed preference components. */
 	private final ChangeSupport changeSupport;
@@ -57,8 +57,8 @@ final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
 	private void updateSelectAllChkBox() {
 		boolean allSelected = true;
 
-		for (AdditionalCloseAction additionalCloseAction : actionChkBoxes.keySet()) {
-			JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseAction);
+		for (AdditionalCloseActionFactory additionalCloseActionFactory : actionChkBoxes.keySet()) {
+			JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseActionFactory);
 			if (!actionChkBox.isSelected()) {
 				allSelected = false;
 				break;
@@ -69,9 +69,9 @@ final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
 	}
 
 	private void generateComponents() {
-		Collection<? extends AdditionalCloseAction> additionalCloseActions = Lookup.getDefault().lookupAll(AdditionalCloseAction.class);
-		for (AdditionalCloseAction additionalCloseAction : additionalCloseActions) {
-			JCheckBox actionChkBox = new JCheckBox(additionalCloseAction.getName() + (!additionalCloseAction.isGlobalAction() ? " (Editor context menu only)" : ""));
+		Collection<? extends AdditionalCloseActionFactory> additionalCloseActionFactories = Lookup.getDefault().lookupAll(AdditionalCloseActionFactory.class);
+		for (AdditionalCloseActionFactory additionalCloseActionFactory : additionalCloseActionFactories) {
+			JCheckBox actionChkBox = new JCheckBox(additionalCloseActionFactory.getName() + (!additionalCloseActionFactory.isGlobalAction() ? " (Editor context menu only)" : ""));
 			actionChkBox.addActionListener((ActionEvent e) -> {
 				fireChangedListener();
 
@@ -80,7 +80,7 @@ final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
 
 			actionChkBoxesPanel.add(actionChkBox);
 
-			actionChkBoxes.put(additionalCloseAction, actionChkBox);
+			actionChkBoxes.put(additionalCloseActionFactory, actionChkBox);
 		}
 	}
 
@@ -137,8 +137,8 @@ final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectAllChkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllChkBoxActionPerformed
-		for (AdditionalCloseAction additionalCloseAction : actionChkBoxes.keySet()) {
-			JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseAction);
+		for (AdditionalCloseActionFactory additionalCloseActionFactory : actionChkBoxes.keySet()) {
+			JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseActionFactory);
 			actionChkBox.setSelected(selectAllChkBox.isSelected());
 
 			fireChangedListener();
@@ -146,18 +146,18 @@ final class AdditionalCloseActionsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_selectAllChkBoxActionPerformed
 
 		void load() {
-			for (AdditionalCloseAction additionalCloseAction : actionChkBoxes.keySet()) {
-				JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseAction);
-				actionChkBox.setSelected(additionalCloseAction.isActive());
+			for (AdditionalCloseActionFactory additionalCloseActionFactory : actionChkBoxes.keySet()) {
+				JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseActionFactory);
+				actionChkBox.setSelected(additionalCloseActionFactory.isActive());
 			}
 
 			updateSelectAllChkBox();
 		}
 
 		void store() {
-			for (AdditionalCloseAction additionalCloseAction : actionChkBoxes.keySet()) {
-				JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseAction);
-				additionalCloseAction.setActive(actionChkBox.isSelected());
+			for (AdditionalCloseActionFactory additionalCloseActionFactory : actionChkBoxes.keySet()) {
+				JCheckBox actionChkBox = actionChkBoxes.get(additionalCloseActionFactory);
+				additionalCloseActionFactory.setActive(actionChkBox.isSelected());
 			}
 		}
 
