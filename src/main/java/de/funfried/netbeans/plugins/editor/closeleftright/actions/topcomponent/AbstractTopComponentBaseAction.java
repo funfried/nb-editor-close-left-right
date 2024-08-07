@@ -33,7 +33,7 @@ public abstract class AbstractTopComponentBaseAction extends AbstractBaseAction 
 	protected final Class<? extends TopComponent>[] topComponentTypes;
 
 	/**
-	 * Constructor of abstract class {@link ActionBase}.
+	 * Constructor of abstract class {@link AbstractTopComponentBaseAction}.
 	 *
 	 * @param name the name of this action
 	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
