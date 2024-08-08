@@ -27,18 +27,18 @@ import de.funfried.netbeans.plugins.editor.closeleftright.AbstractBaseAction;
  *
  * @author bahlef
  */
-abstract class AbstractTopComponentBaseAction extends AbstractBaseAction {
+public abstract class AbstractTopComponentBaseAction extends AbstractBaseAction {
 	private static final long serialVersionUID = 4175615224177055417L;
 
 	protected final Class<? extends TopComponent>[] topComponentTypes;
 
 	/**
-	 * Constructor of abstract class {@link ActionBase}.
+	 * Constructor of abstract class {@link AbstractTopComponentBaseAction}.
 	 *
 	 * @param name the name of this action
 	 * @param topComponentTypes the {@link TopComponent} {@link Class}es which should get closed
 	 */
-	AbstractTopComponentBaseAction(String name, Class<? extends TopComponent>... topComponentTypes) {
+	protected AbstractTopComponentBaseAction(String name, Class<? extends TopComponent>... topComponentTypes) {
 		super(name, null);
 
 		this.topComponentTypes = topComponentTypes;
