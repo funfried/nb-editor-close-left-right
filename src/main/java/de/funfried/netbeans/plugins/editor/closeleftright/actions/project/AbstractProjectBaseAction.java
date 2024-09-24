@@ -16,8 +16,12 @@ package de.funfried.netbeans.plugins.editor.closeleftright.actions.project;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
+import javax.swing.Action;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectInformation;
+import org.netbeans.api.project.ProjectUtils;
 import org.netbeans.api.project.ui.OpenProjects;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -35,6 +39,8 @@ import de.funfried.netbeans.plugins.editor.closeleftright.actions.AbstractInitia
 abstract class AbstractProjectBaseAction extends AbstractInitialCloseBaseAction {
 	private static final long serialVersionUID = 5322225046091709258L;
 
+	private final String actionNamePrefix;
+
 	/**
 	 * Constructor of abstract class {@link ActionBase}.
 	 *
@@ -43,6 +49,8 @@ abstract class AbstractProjectBaseAction extends AbstractInitialCloseBaseAction 
 	 */
 	public AbstractProjectBaseAction(String name, TopComponent topComponent, boolean initialClose) {
 		super(name, topComponent, initialClose);
+
+		actionNamePrefix = name;
 	}
 
 	/**
@@ -70,9 +78,24 @@ abstract class AbstractProjectBaseAction extends AbstractInitialCloseBaseAction 
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isEnabled() {
-		return getProjectByTopComponent(OpenProjects.getDefault().getOpenProjects(), topComponent) != null;
+		Project project = getProjectByTopComponent(OpenProjects.getDefault().getOpenProjects(), topComponent);
+		if (project != null) {
+			ProjectInformation projectInfo = ProjectUtils.getInformation(project);
+			if (projectInfo != null) {
+				putValue(Action.NAME, actionNamePrefix + " (" + projectInfo.getDisplayName() + ")");
+			}
+
+			return true;
+		} else {
+			putValue(Action.NAME, actionNamePrefix);
+
+			return false;
+		}
 	}
 
 	private Project getProjectByTopComponent(Project[] openProjects, TopComponent topComponent) {
