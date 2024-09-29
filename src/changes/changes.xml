@@ -9,12 +9,12 @@
 	</properties>
 
 	<body>
-		<release version="1.0.7-SNAPSHOT" date="n/a" description="n/a">
+		<release version="1.0.7" date="2024-09-29" description="NetBeans compatibility issue fix">
 			<action dev="bahlef" type="change">
 				Added project names to project specific context menu actions
 			</action>
 			<action dev="bahlef" type="change" issue="35">
-				Separated the version specific VCS actions into plugin extensions.
+				Separated the NetBeans version specific VCS actions into seperate plugin extensions.
 			</action>
 		</release>
 
