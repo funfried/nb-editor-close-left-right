@@ -12,13 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v5
     - name: Set up JDK 8
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v5
       with:
         java-version: '8'
         distribution: 'adopt'
         cache: maven
+    - name: Cache Dependency-Check DB
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository/org/owasp/dependency-check-data
+        key: ${{ runner.os }}-dc-data-v12
+        restore-keys: |
+          ${{ runner.os }}-dc-data-
     - name: Build and Deploy with Maven
       run: |
         git config --global user.email "info@funfried.de"
@@ -29,12 +36,13 @@ jobs:
         mvn -s .ci.settings.xml --no-transfer-progress -Prelease-commons,github clean deploy
       env:
         GPG_TTY: $(tty)
-        MAVEN_OPTS: -Xms128m -Xmx512m
+        MAVEN_OPTS: -Xms256m -Xmx2g
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        signing_keypass: ${{ secrets.GPG_PASSPHRASE }}
         gh_username: ${{ secrets.GH_USERNAME }}
         gh_token: ${{ secrets.GH_TOKEN }}
         sonatype_username: ${{ secrets.SONATYPE_USERNAME }}
         sonatype_password: ${{ secrets.SONATYPE_PASSWORD }}
         repoToken: ${{ secrets.COVERALLS_REPOTOKEN }}
-        signing_keypass: ${{ secrets.GPG_PASSPHRASE }}
         skipRemoteStaging: ${{ secrets.SKIP_REMOTE_STAGING }}
         nvd_api_key: ${{ secrets.NVD_API_KEY }}
