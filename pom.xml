@@ -92,6 +92,7 @@
 		<commons-lang.version>3.19.0</commons-lang.version>
 		<netbeans.version>RELEASE110</netbeans.version>
 		<pmd.version>7.17.0</pmd.version>
+		<scm.version>2.2.1</scm.version>
 		<argLine></argLine>
 	</properties>
 
@@ -168,6 +169,31 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang.version}</version>
+		</dependency>
+
+		<!-- Apache Maven -->
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-api</artifactId>
+			<version>${scm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-gitexe</artifactId>
+			<version>${scm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-git-commons</artifactId>
+			<version>${scm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-jgit</artifactId>
+			<version>${scm.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -336,6 +362,13 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-changelog-plugin</artifactId>
 					<version>2.3</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-jgit</artifactId>
+							<version>${scm.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -557,6 +590,12 @@
 						</goals>
 						<configuration>
 							<failOnWarning>true</failOnWarning>
+							<ignoredUnusedDeclaredDependencies>
+								<ignoredUnusedDeclaredDependency>org.apache.maven.scm:maven-scm-api</ignoredUnusedDeclaredDependency>
+								<ignoredUnusedDeclaredDependency>org.apache.maven.scm:maven-scm-provider-jgit</ignoredUnusedDeclaredDependency>
+								<ignoredUnusedDeclaredDependency>org.apache.maven.scm:maven-scm-provider-gitexe</ignoredUnusedDeclaredDependency>
+								<ignoredUnusedDeclaredDependency>org.apache.maven.scm:maven-scm-provider-git-commons</ignoredUnusedDeclaredDependency>
+							</ignoredUnusedDeclaredDependencies>
 						</configuration>
 					</execution>
 				</executions>
@@ -575,6 +614,14 @@
 				</executions>
 			</plugin>
 		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-jgit</artifactId>
+				<version>${scm.version}</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<reporting>
