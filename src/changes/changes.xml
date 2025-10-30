@@ -9,6 +9,9 @@
 	</properties>
 
 	<body>
+		<release version="1.0.8-SNAPSHOT" date="n/a" description="n/a">
+		</release>
+
 		<release version="1.0.7" date="2024-09-29" description="NetBeans compatibility issue fix">
 			<action dev="bahlef" type="change">
 				Added project names to project specific context menu actions
